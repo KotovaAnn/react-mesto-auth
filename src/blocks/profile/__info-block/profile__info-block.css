@@ -1,0 +1,12 @@
+.profile__info-block {
+  display: flex;
+  box-sizing: border-box;
+  justify-content: space-between;
+  padding-top: 22px;
+}
+@media screen and (max-width: 597px) {
+  .profile__info-block {
+    padding-top: 1px;
+    min-width: 218px;
+  }
+}

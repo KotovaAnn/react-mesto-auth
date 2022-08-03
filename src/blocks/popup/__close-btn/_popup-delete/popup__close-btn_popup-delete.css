@@ -1,0 +1,12 @@
+.popup .popup__close-btn_popup-delete {
+  top: -80px;
+  right: -80px;
+}
+@media screen and (max-width: 570px) {
+  .popup .popup__close-btn_popup-delete {
+    width: 20px;
+    height: 20px;
+    top: -35px;
+    right: 0;
+  }
+}

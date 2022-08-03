@@ -1,0 +1,8 @@
+.popup__error_type_name-input-error {
+  top: 103px;
+}
+@media screen and (max-width: 550px) {
+  .popup__error_type_name-input-error {
+    top: 122px;
+  }
+}

@@ -1,0 +1,9 @@
+.element__button-delete_active {
+  width: 18px;
+  background: url(../../../../images/basket.svg);
+  background-size: cover;
+}
+.element__button-delete_active:hover {
+  opacity: 0.5;
+  cursor: pointer;
+}

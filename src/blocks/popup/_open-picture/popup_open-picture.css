@@ -1,0 +1,10 @@
+.popup_open-picture {
+   background-color:  rgba(0, 0, 0, 0.9);
+   padding: 0;
+   margin: 0;
+}
+@media screen and (max-width: 570px) {
+  .popup_open-picture {
+    min-width: 282px;
+  }
+}

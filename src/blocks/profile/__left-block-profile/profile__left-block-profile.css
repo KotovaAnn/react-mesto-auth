@@ -1,0 +1,16 @@
+.profile__left-block-profile {
+  display: flex;
+  flex-wrap: wrap;
+  position: relative;
+}
+@media screen and (max-width: 597px) {
+  .profile__left-block-profile {
+    justify-content: center;
+    width: 100%;
+  }
+}
+@media screen and (max-width: 700px) {
+  .profile__left-block-profile {
+    margin: 0 auto;
+  }
+}
