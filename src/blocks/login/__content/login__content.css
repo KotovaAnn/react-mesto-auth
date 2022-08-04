@@ -1,0 +1,15 @@
+.login__content {
+    width: 430px;
+    margin: 60px auto;
+    position: relative;
+    padding: 34px 36px 37px;
+    box-sizing: border-box;
+  }
+  @media screen and (max-width: 450px) {
+    .login__content {
+      width: 100%;
+      min-width: 282px;
+      padding: 25px 22px 25px;
+      margin: 0 19px 0 19px;
+    }
+  }

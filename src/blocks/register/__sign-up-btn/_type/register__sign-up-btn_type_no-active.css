@@ -1,0 +1,10 @@
+.register__sign-up-btn_type_no-active {
+  opacity: 0.2;
+  background-color: #fff;
+  color: #000;
+  opacity: 0.5;
+  border: 1px solid #000;
+}
+.register__sign-up-btn_type_no-active:hover {
+  opacity: 0.2;
+}
