@@ -1,9 +1,6 @@
 import React from 'react';
 
-function ImagePopup({ card, isOpen, onClose, handleEsc }) {
-  if(isOpen) {
-    handleEsc();
-  }
+function ImagePopup({ card, isOpen, onClose }) {
   return (
     <div className={`popup popup_open-picture ${(isOpen) && "popup_opened"}`}>
       <div className="popup__conteiner">

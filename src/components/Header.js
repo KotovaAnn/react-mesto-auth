@@ -17,7 +17,7 @@ function Header(props) {
           (currentLoggedIn === true) ? (
             <div className="header__navigation">
               <p className="header__user-email">{props.userEmail}</p>
-              <NavLink className="header__link-out" to="/sign-in" onClick={props.signOut}>Выйти</NavLink>
+              <button className="header__link-out" onClick={props.signOut}>Выйти</button> 
             </div>
           ) : (location.pathname === '/sign-in') ? ( 
             <NavLink className="header__link" to="/sign-up">Регистрация</NavLink>

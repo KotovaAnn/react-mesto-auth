@@ -31,27 +31,29 @@ function App() {
   const [loggedIn, setLoggedIn] = useState(false);
   const [registered, setRegistered] = useState(false);
   const [isInfotooltip, setIsInfotooltip] = useState(false);
-  const [userEmail, setUserEmail] = useState("e-mail");
-
+  const [userEmail, setUserEmail] = useState("");
+  const isOpened = isEditProfilePopupOpen || isAddPlacePopupOpen || isEditAvatarPopupOpen || isImagePopup || isInfotooltip;
+  
   useEffect(() => {
     handleTokenCheck();
-
-    api.getInitialCards()
-      .then(res => {
-        setCards(res);
-      })
-      .catch(err => {
-        console.log(err);
-      });
-      api.getInfoUser()
-      .then(res => {
-        setCurrentUser(res);
-      })
-      .catch(err => {
-        console.log(err);
-      });
   }, []);
 
+  useEffect(() => {
+    function handleEsc(evt) {
+      
+      if (evt.key === "Escape") {
+        closeAllPopups();
+      }
+    }
+
+    if (isOpened) {
+      document.addEventListener('keydown', handleEsc);
+      return () => {
+        document.removeEventListener('keydown', handleEsc);
+      }
+    }
+  }, [isOpened]);
+  
   function handleCardLike(card) {
     const isLiked = card.likes.some(i => i._id === currentUser._id);
     api.changeLikeCardStatus(card._id, !isLiked)
@@ -90,6 +92,7 @@ function App() {
      })
      .catch(err => {
       console.log(err);
+      setIsLoading(false);
     });
   }
 
@@ -102,6 +105,7 @@ function App() {
      })
      .catch(err => {
       console.log(err);
+      setIsLoading(false);
     });
   }
   
@@ -115,6 +119,7 @@ function App() {
     })
     .catch(err => {
       console.log(err);
+      setIsLoading(false);
     });
   }
 
@@ -129,17 +134,14 @@ function App() {
 
   function handleEditAvatarClick() {
     setIsEditAvatarPopupOpen(true);
-    handleEsc();
   }
 
   function handleEditProfileClick() {
     setIsEditProfilePopupOpen(true);
-    handleEsc();
   }
 
   function handleAddPlaceClick() {
     setIsAddPlacePopupOpen(true);
-    handleEsc();
   }
 
   function closeAllPopups() {
@@ -150,12 +152,23 @@ function App() {
     setIsInfotooltip(false);
     setSelectedCard({selectedCard: ""});
   }
+  function getUserInfo() {
+    api.getInfoUser()
+      .then(res => {
+        setCurrentUser(res);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }
 
-  function handleEsc() {
-    document.addEventListener('keydown', (evt) => {
-      if(evt.key === "Escape") {
-        closeAllPopups();
-      }
+  function getCards() {
+    api.getInitialCards()
+    .then(res => {
+      setCards(res);
+    })
+    .catch(err => {
+      console.log(err);
     });
   }
 
@@ -164,7 +177,9 @@ function App() {
       history.push('/sign-in');
       setRegistered(true);
       setIsInfotooltip(true);
-      handleEsc();
+      getUserInfo();
+      getCards();
+      setUserEmail(email);
     })
     .catch(err => {
       setRegistered(false);
@@ -178,12 +193,14 @@ function App() {
       setLoggedIn(true);
       history.push('/');
       localStorage.setItem('jwt', res.token);
+      getUserInfo();
+      getCards();
+      setUserEmail(email);
     })
     .catch(err => {
       console.log(err);
       setRegistered(false);
       setIsInfotooltip(true);
-      handleEsc();
     });
   }
 
@@ -196,6 +213,8 @@ function App() {
             setLoggedIn(true);
             history.push('/');
             setUserEmail(res.data.email);
+            getUserInfo();
+            getCards();
           }
         })
         .catch(err => {
@@ -208,6 +227,7 @@ function App() {
     setLoggedIn(false);
     localStorage.removeItem('jwt');
     history.push('/sign-in');
+    setUserEmail("");
   }
 
   return (
@@ -266,7 +286,7 @@ function App() {
             renderLoading={RenderLoading(isLoading)}
           />
 
-          <ImagePopup card={selectedCard} isOpen={isImagePopup} onClose={closeAllPopups} handleEsc={handleEsc} />
+          <ImagePopup card={selectedCard} isOpen={isImagePopup} onClose={closeAllPopups} />
 
           <InfoTooltip isOpen={isInfotooltip} onClose={closeAllPopups} registered={registered}/>
           

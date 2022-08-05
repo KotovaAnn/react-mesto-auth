@@ -17,13 +17,13 @@ function Main(props) {
           <div className="profile__info">
             <div className="profile__info-block">
               <h1 className="profile__title">{currentUser.name}</h1>
-              <button className="button profile__edit-button" type="button" onClick={props.onEditProfile}></button>
+              <button className="button profile__edit-button" type="button" onClick={props.onEditProfile} />
             </div>
             <p className="profile__subtitle">{currentUser.about}</p>
           </div>
         </div>
 
-        <button className="button profile__add-button" type="button" onClick={props.onAddPlace}></button>
+        <button className="button profile__add-button" type="button" onClick={props.onAddPlace} />
       </section>
       console.log(props.card);
       <section className="elements">
