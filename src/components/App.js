@@ -54,6 +54,25 @@ function App() {
     }
   }, [isOpened]);
   
+  useEffect(() => {
+    if (loggedIn) {
+      api.getInfoUser()
+      .then(res => {
+        setCurrentUser(res);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+      api.getInitialCards()
+       .then(res => {
+        setCards(res);
+      })
+       .catch(err => {
+        console.log(err);
+      });
+    }
+  }, [loggedIn]); 
+
   function handleCardLike(card) {
     const isLiked = card.likes.some(i => i._id === currentUser._id);
     api.changeLikeCardStatus(card._id, !isLiked)
@@ -88,10 +107,11 @@ function App() {
      .then(res => {
       setCurrentUser(res);
       closeAllPopups();
-      setIsLoading(false);
      })
      .catch(err => {
       console.log(err);
+    })
+     .finally(res => {
       setIsLoading(false);
     });
   }
@@ -101,10 +121,11 @@ function App() {
      .then(res => {
       setCurrentUser(res);
       closeAllPopups();
-      setIsLoading(false);
      })
      .catch(err => {
       console.log(err);
+    })
+     .finally(res => {
       setIsLoading(false);
     });
   }
@@ -115,10 +136,11 @@ function App() {
     .then(newCard => {
       handleAddPlaceSubmit(newCard)
       closeAllPopups();
-      setIsLoading(false);
     })
     .catch(err => {
       console.log(err);
+    })
+    .finally(res => {
       setIsLoading(false);
     });
   }
@@ -152,34 +174,12 @@ function App() {
     setIsInfotooltip(false);
     setSelectedCard({selectedCard: ""});
   }
-  function getUserInfo() {
-    api.getInfoUser()
-      .then(res => {
-        setCurrentUser(res);
-      })
-      .catch(err => {
-        console.log(err);
-      });
-  }
-
-  function getCards() {
-    api.getInitialCards()
-    .then(res => {
-      setCards(res);
-    })
-    .catch(err => {
-      console.log(err);
-    });
-  }
 
   function handleRegistration(email, password) {
     auth.register(email, password).then((res) => {   
       history.push('/sign-in');
       setRegistered(true);
       setIsInfotooltip(true);
-      getUserInfo();
-      getCards();
-      setUserEmail(email);
     })
     .catch(err => {
       setRegistered(false);
@@ -193,8 +193,6 @@ function App() {
       setLoggedIn(true);
       history.push('/');
       localStorage.setItem('jwt', res.token);
-      getUserInfo();
-      getCards();
       setUserEmail(email);
     })
     .catch(err => {
@@ -213,8 +211,6 @@ function App() {
             setLoggedIn(true);
             history.push('/');
             setUserEmail(res.data.email);
-            getUserInfo();
-            getCards();
           }
         })
         .catch(err => {
