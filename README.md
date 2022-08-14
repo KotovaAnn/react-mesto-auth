@@ -1,4 +1,5 @@
 # Проектная работа "Mesto Russia" на React
+  
 **Описание проекта:** Одностраничный сайт по типу Инстаграма. Представляет собой галерею
 фотографий на тему "Места России". Проект выполнен с использованием библиотеки React. Все  
 данные на сайте подгружаются с использованием API.  
@@ -7,7 +8,17 @@
 Функционал приложения позволяет осуществлять регистрация пользователя, вход  
 в личный кабинет, выход из кабинета, подгружается емейл пользователя и данные в профиле.  
 Пользователь может загружать картинки с названиями в галерею и изменять личные данные.  
+  
 **Реализация работы:** В процессе создания проекта задействованы знания html и CSS,
 адаптивной верстки, классической файловой структуры по БЭМ, JavaScript, React, API.
+  
+#### Стек:
+
+![HTML5](https://img.shields.io/badge/-HTML5-141130?style=flat-square&logo=HTML5&logoColor=FF0000)
+![CSS3](https://img.shields.io/badge/-CSS3-141130?style=flat-square&logo=CSS3&logoColor=009900)
+![JavaScript](https://img.shields.io/badge/-JavaScript-141130?style=flat-square&logo=JavaScript&logoColor=yellow)
+![React](https://img.shields.io/badge/-React-141130?style=flat-square&logo=React&)
+  
 **Технические требования:** Наличие редактора кода и современного браузера.
+  
 **Ссылка на проект:** [mesto-russia.ru](https://kotovaann.github.io/mesto-react/)
